@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { render } from 'github-buttons'
 
-class GitHubButton extends Component {
+class GitHubButton extends PureComponent {
   constructor (props) {
     super(props)
     this.ref = props.ref || React.createRef()
