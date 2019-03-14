@@ -23,6 +23,6 @@
   },
   "homepage": "https://github.com/ntkme/react-github-btn#readme",
   "dependencies": {
-    "github-buttons": "^2.1.0"
+    "github-buttons": "^2.2.5"
   }
 }
