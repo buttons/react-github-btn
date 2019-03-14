@@ -21,7 +21,7 @@
   "bugs": {
     "url": "https://github.com/ntkme/react-github-btn/issues"
   },
-  "homepage": "https://github.com/ntkme/react-github-btn#readme",
+  "homepage": "https://buttons.github.io/",
   "dependencies": {
     "github-buttons": "^2.2.5"
   }
