@@ -4,10 +4,11 @@ import { render } from 'github-buttons'
 class GitHubButton extends PureComponent {
   constructor (props) {
     super(props)
-    this.ref = props.ref || React.createRef()
+    this.$ = React.createRef()
+    this._ = React.createRef()
   }
   render () {
-    return React.createElement('a', { ...this.props, ref: this.ref }, this.props.children)
+    return React.createElement('span', { ref: this.$ }, React.createElement('a', { ...this.props, ref: this._ }, this.props.children))
   }
   componentDidMount () {
     this.paint()
@@ -22,16 +23,15 @@ class GitHubButton extends PureComponent {
     this.reset()
   }
   paint () {
-    (function ($el, _) {
-      render($el.parentNode.insertBefore(_, $el).appendChild($el), function (el) {
-        try {
-          _.replaceChild(el, $el)
-        } catch (_) {}
-      })
-    })(this.ref.current, this._ = document.createElement('span'))
+    var _ = this.$.current.appendChild(document.createElement('span'))
+    render(_.appendChild(this._.current), function (el) {
+      try {
+        _.parentNode.replaceChild(el, _)
+      } catch (_) {}
+    })
   }
   reset () {
-    this._.parentNode.replaceChild(this.ref.current, this._)
+    this.$.current.replaceChild(this._.current, this.$.current.lastChild)
   }
 }
 
