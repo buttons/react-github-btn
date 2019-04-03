@@ -3,6 +3,7 @@
   "version": "1.0.3",
   "description": "GitHub button component for React.js",
   "main": "index.js",
+  "types": "index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ntkme/react-github-btn.git"
@@ -23,6 +24,6 @@
   },
   "homepage": "https://buttons.github.io/",
   "dependencies": {
-    "github-buttons": "^2.2.5"
+    "github-buttons": "^2.2.9"
   }
 }
