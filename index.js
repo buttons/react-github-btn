@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import { render } from 'github-buttons'
 
 class GitHubButton extends PureComponent {
   constructor (props) {
@@ -23,11 +22,13 @@ class GitHubButton extends PureComponent {
     this.reset()
   }
   paint () {
-    var _ = this.$.current.appendChild(document.createElement('span'))
-    render(_.appendChild(this._.current), function (el) {
-      try {
-        _.parentNode.replaceChild(el, _)
-      } catch (_) {}
+    const _ = this.$.current.appendChild(document.createElement('span'))
+    import(/* webpackMode: "eager" */ 'github-buttons').then(({ render }) => {
+      render(_.appendChild(this._.current), function (el) {
+        try {
+          _.parentNode.replaceChild(el, _)
+        } catch (_) {}
+      })
     })
   }
   reset () {
