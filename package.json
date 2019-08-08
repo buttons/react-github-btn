@@ -1,6 +1,6 @@
 {
   "name": "react-github-btn",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "GitHub button component for React.js",
   "main": "index.js",
   "types": "index.d.ts",
@@ -24,6 +24,6 @@
   },
   "homepage": "https://buttons.github.io/",
   "dependencies": {
-    "github-buttons": "^2.2.9"
+    "github-buttons": "^2.2.10"
   }
 }
