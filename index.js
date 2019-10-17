@@ -12,8 +12,9 @@ class GitHubButton extends PureComponent {
   componentDidMount () {
     this.paint()
   }
-  componentWillUpdate () {
+  getSnapshotBeforeUpdate () {
     this.reset()
+    return null
   }
   componentDidUpdate () {
     this.paint()
