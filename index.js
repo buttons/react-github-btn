@@ -25,12 +25,13 @@ class GitHubButton extends PureComponent {
   paint () {
     const _ = this.$.current.appendChild(document.createElement('span'))
     import(/* webpackMode: "eager" */ 'github-buttons').then(({ render }) => {
-      if (!this._.current) return
-      render(_.appendChild(this._.current), function (el) {
-        try {
-          _.parentNode.replaceChild(el, _)
-        } catch (_) {}
-      })
+      if (this._.current != null) {
+        render(_.appendChild(this._.current), function (el) {
+          try {
+            _.parentNode.replaceChild(el, _)
+          } catch (_) {}
+        })
+      }
     })
   }
   reset () {
