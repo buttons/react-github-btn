@@ -24,6 +24,6 @@
   },
   "homepage": "https://buttons.github.io/",
   "dependencies": {
-    "github-buttons": "^2.8.0"
+    "github-buttons": "^2.19.0"
   }
 }
