@@ -2,8 +2,8 @@
   "name": "react-github-btn",
   "version": "1.2.1",
   "description": "GitHub button component for React.js",
-  "type": "module",
   "main": "index.js",
+  "type": "module",
   "types": "index.d.ts",
   "repository": {
     "type": "git",
@@ -25,6 +25,6 @@
   },
   "homepage": "https://buttons.github.io/",
   "dependencies": {
-    "github-buttons": "^2.19.0"
+    "github-buttons": "^2.21.1"
   }
 }
