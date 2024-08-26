@@ -12,17 +12,31 @@ const GitHubButton = React.memo(({ children, ...props }) => {
 
     import(/* webpackMode: "eager" */ "github-buttons")
       .then(({ render }) => {
-        if (buttonRef.current && containerRef.current) {
+        if (
+          buttonRef.current &&
+          containerRef.current &&
+          containerRef.current.lastChild === tempSpan
+        ) {
           render(tempSpan.appendChild(buttonRef.current), (el) => {
-            containerRef.current?.contains(tempSpan) &&
+            if (
+              containerRef.current &&
+              containerRef.current.lastChild === tempSpan
+            ) {
               containerRef.current.replaceChild(el, tempSpan);
+            }
           });
         }
       })
       .catch((error) => {
         console.error("Error loading github-buttons:", error);
-        containerRef.current?.contains(tempSpan) && containerRef.current.removeChild(tempSpan);
-      });  }, []);
+        if (
+          containerRef.current &&
+          containerRef.current.lastChild === tempSpan
+        ) {
+          containerRef.current.removeChild(tempSpan);
+        }
+      });
+  }, []);
 
   useEffect(() => {
     paint();
