@@ -1,42 +1,65 @@
-import React, { PureComponent } from 'react'
+import React, { useCallback, useEffect, useRef } from "react";
 
-class GitHubButton extends PureComponent {
-  constructor (props) {
-    super(props)
-    this.$ = React.createRef()
-    this._ = React.createRef()
-  }
-  render () {
-    return React.createElement('span', { ref: this.$ }, React.createElement('a', { ...this.props, ref: this._ }, this.props.children))
-  }
-  componentDidMount () {
-    this.paint()
-  }
-  getSnapshotBeforeUpdate () {
-    this.reset()
-    return null
-  }
-  componentDidUpdate () {
-    this.paint()
-  }
-  componentWillUnmount () {
-    this.reset()
-  }
-  paint () {
-    const _ = this.$.current.appendChild(document.createElement('span'))
-    import(/* webpackMode: "eager" */ 'github-buttons').then(({ render }) => {
-      if (this._.current != null) {
-        render(_.appendChild(this._.current), function (el) {
-          try {
-            _.parentNode.replaceChild(el, _)
-          } catch (_) {}
-        })
+const GitHubButton = React.memo(({ children, ...props }) => {
+  const containerRef = useRef(null);
+  const buttonRef = useRef(null);
+
+  const paint = useCallback(() => {
+    if (!containerRef.current) return;
+
+    const tempSpan = document.createElement("span");
+    containerRef.current.appendChild(tempSpan);
+
+    import(/* webpackMode: "eager" */ "github-buttons")
+      .then(({ render }) => {
+        if (
+          buttonRef.current &&
+          containerRef.current &&
+          containerRef.current.lastChild === tempSpan
+        ) {
+          render(tempSpan.appendChild(buttonRef.current), (el) => {
+            if (
+              containerRef.current &&
+              containerRef.current.lastChild === tempSpan
+            ) {
+              containerRef.current.replaceChild(el, tempSpan);
+            }
+          });
+        }
+      })
+      .catch((error) => {
+        console.error("Error loading github-buttons:", error);
+        if (
+          containerRef.current &&
+          containerRef.current.lastChild === tempSpan
+        ) {
+          containerRef.current.removeChild(tempSpan);
+        }
+      });
+  }, []);
+
+  useEffect(() => {
+    paint();
+
+    return () => {
+      if (containerRef.current) {
+        const lastChild = containerRef.current.lastChild;
+        if (lastChild && lastChild !== buttonRef.current) {
+          containerRef.current.removeChild(lastChild);
+        }
       }
-    })
-  }
-  reset () {
-    this.$.current.replaceChild(this._.current, this.$.current.lastChild)
-  }
-}
+    };
+  }, [paint]);
 
-export default GitHubButton
+  return (
+    <span ref={containerRef}>
+      <a {...props} ref={buttonRef}>
+        {children}
+      </a>
+    </span>
+  );
+});
+
+GitHubButton.displayName = "GitHubButton";
+
+export default GitHubButton;
