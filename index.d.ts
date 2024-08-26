@@ -11,7 +11,7 @@ export interface GitHubButtonProps {
   children?: React.ReactNode;
 }
 
-export interface ReactGitHubButtonProps extends GitHubButtonProps & React.AnchorHTMLAttributes<HTMLAnchorElement> {}
+export type ReactGitHubButtonProps = GitHubButtonProps & React.AnchorHTMLAttributes<HTMLAnchorElement>;
 
 declare const GitHubButton: React.FC<ReactGitHubButtonProps>;
 
