@@ -1,6 +1,6 @@
 import React from 'react';
 
-export interface GitHubButtonProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface GitHubButtonProps {
   href: string;
   'data-color-scheme'?: 'no-preference' | 'light' | 'dark';
   'data-icon'?: 'octicon-star' | 'octicon-repo-forked' | 'octicon-eye' | 'octicon-issue-opened' | 'octicon-git-pull-request';
@@ -11,6 +11,8 @@ export interface GitHubButtonProps extends React.AnchorHTMLAttributes<HTMLAnchor
   children?: React.ReactNode;
 }
 
-declare const GitHubButton: React.FC<GitHubButtonProps>;
+export interface ReactGitHubButtonProps extends GitHubButtonProps & React.AnchorHTMLAttributes<HTMLAnchorElement> {}
+
+declare const GitHubButton: React.FC<ReactGitHubButtonProps>;
 
 export default GitHubButton;
